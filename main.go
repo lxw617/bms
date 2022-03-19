@@ -1,7 +1,11 @@
 package main
 
-import "fmt"
+import (
+	"bms/server"
+	"bms/utils"
+)
 
 func main() {
-	fmt.Println("hello world")
+	utils.SetupDB()
+	server.SetupServer()
 }
