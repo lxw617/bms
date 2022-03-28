@@ -1,0 +1,41 @@
+{
+    "isDevelopment":true,
+    "name": "bms",
+    "resource":{
+        "database": {
+          "bookstore": {
+            "r": {
+              "dialect": "mysql",
+              "host": "127.0.0.1",
+              "port": 3306,
+              "user": "root",
+              "password": "root",
+              "database": "bookstore",
+              "maxIdle": 20,
+              "maxOpen": 20
+            },
+            "wr": {
+              "dialect": "mysql",
+              "host": "127.0.0.1",
+              "port": 3306,
+              "user": "root",
+              "password": "root",
+              "database": "bookstore",
+              "maxIdle": 20,
+              "maxOpen": 20
+            }
+          },
+          "redis": {
+            "default": {
+              "addr": "soda-dev.redis.rds.aliyuncs.com:6379",
+              "password": "GtvTu4b82RMPLruGk3P3",
+              "database": 1,
+              "prefix": "soda:erp:api:",
+              "maxIdle": 20,
+              "maxActive": 50,
+              "idleTimeout": 60
+            }
+          }
+        }
+    }
+}

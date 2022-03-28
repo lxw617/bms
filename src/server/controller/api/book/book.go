@@ -1,19 +1,19 @@
-package controller
+package book
 
 import (
-	"bms/dao"
-	"bms/model"
+	"bms/src/server/dao/api"
+	"bms/src/server/model"
 	"github.com/kataras/iris/v12"
 )
 
 // BookController ...
 type BookController struct {
-	dao *dao.BookDao
+	dao *api.BookDao
 }
 
 // NewBookController ...
 func NewBookController() *BookController {
-	return &BookController{dao: &dao.BookDao{}}
+	return &BookController{dao: &api.BookDao{}}
 }
 
 // Get ...
@@ -23,6 +23,12 @@ func (b *BookController) Get(ctx iris.Context) {
 	book, _ := b.dao.GetBook(bookID)
 	_, _ = ctx.JSON(book)
 	ctx.Next()
+}
+
+// GetAll ...
+func (b *BookController) GetAll(ctx iris.Context) {
+	books, _ := b.dao.GetAllBook()
+	_, _ = ctx.JSON(books)
 }
 
 // Create 创建书籍
@@ -47,6 +53,13 @@ func (b *BookController) Update(ctx iris.Context) {
 }
 
 func (b *BookController) Delete(ctx iris.Context) {
+	bookId, _ := ctx.Params().GetInt("id")
+	_ = b.dao.DeleteBook(bookId)
+	_, _ = ctx.JSON(map[string]interface{}{
+		"status": "OK",
+	})
+}
+func (b *BookController) BatchCreate(ctx iris.Context) {
 	bookId, _ := ctx.Params().GetInt("id")
 	_ = b.dao.DeleteBook(bookId)
 	_, _ = ctx.JSON(map[string]interface{}{

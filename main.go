@@ -1,11 +1,12 @@
 package main
 
 import (
-	"bms/server"
-	"bms/utils"
+	"bms/src/server"
+	"bms/src/server/utils"
 )
 
 func main() {
+	utils.SetupConfig()
 	utils.SetupDB()
 	server.SetupServer()
 }
