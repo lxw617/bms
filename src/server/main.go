@@ -21,6 +21,19 @@ func SetupServer() {
 	}
 	route.Route(app)
 
+	//加载html模板文件
+	app.RegisterView(iris.HTML("./src/views", ".html"))
+	app.Get("/", func(context iris.Context) {
+		//绑定页面message 参数
+		context.ViewData("message", "Hello world")
+		//渲染模板文件
+		context.View("hello.html")
+	})
+
+	//使用网络地址启动服务器
+	//app.Run(iris.Addr(":3000"))
+
+	//创建自定义或标准 net.Listener 并将其传递给 app.Run
 	if err := app.Listen(":3000"); err != nil {
 		panic(err)
 	}
